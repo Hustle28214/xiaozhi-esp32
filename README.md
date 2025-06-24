@@ -11,12 +11,17 @@
 # 主要改动
 
 > main/boards/ESP2JETSON下：
+
 ESP2JETSON.cc: 初始化I2C、外设以及IOT设置
+
 GetSensorStatus.cc：初始化传感器的GPIO和中断设置
+
 SensorManager.cc：已经弃用（不再使用旧的IOT方法，已经迁移到MCP协议实现），目前只调取了设置音量的iot方法
 
 > main/mcp_server.cc:
+
 使用MCP协议获取超声波传感器数据：
+
 ```cpp
 AddTool("self.get_ultrasonic_sensor_status",
         "提供了实时的超声波传感器数据，返回值为人到机械臂的距离，单位为毫米\n"
@@ -31,6 +36,7 @@ AddTool("self.get_ultrasonic_sensor_status",
 ```
 
 > main/boards/common/ultrasonic.cc:
+
 添加了超声波传感器引脚状态初始化和距离计算方法。
 
 # 未来计划
