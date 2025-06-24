@@ -44,6 +44,7 @@ namespace iot {
                     if (heartRate < 60.0f) {
                         feedback = "Heart rate too low, please rest";
                     } else if (heartRate > 100.0f) {
+                        
                         feedback = "Heart rate too high, please relax";
                     } else {
                         feedback = "Heart rate normal";
