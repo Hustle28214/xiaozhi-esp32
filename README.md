@@ -39,4 +39,4 @@ AddTool("self.get_ultrasonic_sensor_status",
 
 # 接线（正在更新）
 
-[接线图](main\boards\ESP2JETSON\接线.png)
+[接线图](main/boards/ESP2JETSON/接线.png)
