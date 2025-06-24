@@ -20,39 +20,44 @@ namespace iot {
     public:
         Sensor(GetSensorStatus* sensor) : Thing("Sensor", "传感器数据"), 
                   sensor_reader_(sensor)  // 初始化传感器
-        {
-            methods_.AddMethod("speak", "超声波检测", 
-                ParameterList({Parameter("text", "播报内容", kValueTypeString, true)}),
-                [this](const ParameterList& params) {
-                    float distance = sensor_reader_->ReadDistance();
-                    
-                    if (distance < 30.0f) {
-                        std::string greeting = "Hello, welcome!";
-                        ESP_LOGI(SENSOR_TAG, "Person detected (%.1fcm), play: %s", 
-                                distance, greeting.c_str());
-                    } else {
-                        ESP_LOGI(SENSOR_TAG, "No person (%.1fcm > 30cm)", distance);
-                    }
-                });
+        {   
+            // properties_.AddNumberProperty("Ultrasonic","获取超声波传感器数据，返回值为人到机械臂的距离",[this]()-> float{
+            //     auto ultra = Board::GetInstance().GetUltrasonic();
+            //     return ultra->ReadDistance();
+            // });
 
-            methods_.AddMethod("heartbeat", "心跳检测", 
-                ParameterList({Parameter("text", "播报内容", kValueTypeString, true)}),
-                [this](const ParameterList& params) {
-                    float heartRate = sensor_reader_->ReadHeartBeatRate();
-                    std::string feedback;
+            // methods_.AddMethod("speak", "超声波检测", 
+            //     ParameterList({Parameter("text", "播报内容", kValueTypeString, true)}),
+            //     [this](const ParameterList& params) {
+            //         float distance = sensor_reader_->ReadDistance();
                     
-                    if (heartRate < 60.0f) {
-                        feedback = "Heart rate too low, please rest";
-                    } else if (heartRate > 100.0f) {
+            //         if (distance < 30.0f) {
+            //             std::string greeting = "Hello, welcome!";
+            //             ESP_LOGI(SENSOR_TAG, "Person detected (%.1fcm), play: %s", 
+            //                     distance, greeting.c_str());
+            //         } else {
+            //             ESP_LOGI(SENSOR_TAG, "No person (%.1fcm > 30cm)", distance);
+            //         }
+            //     });
+
+            // methods_.AddMethod("heartbeat", "心跳检测", 
+            //     ParameterList({Parameter("text", "播报内容", kValueTypeString, true)}),
+            //     [this](const ParameterList& params) {
+            //         float heartRate = sensor_reader_->ReadHeartBeatRate();
+            //         std::string feedback;
+                    
+            //         if (heartRate < 60.0f) {
+            //             feedback = "Heart rate too low, please rest";
+            //         } else if (heartRate > 100.0f) {
                         
-                        feedback = "Heart rate too high, please relax";
-                    } else {
-                        feedback = "Heart rate normal";
-                    }
+            //             feedback = "Heart rate too high, please relax";
+            //         } else {
+            //             feedback = "Heart rate normal";
+            //         }
                     
-                    ESP_LOGI(SENSOR_TAG, "Heart: %.1f BPM, feedback: %s", 
-                            heartRate, feedback.c_str());
-                });
+            //         ESP_LOGI(SENSOR_TAG, "Heart: %.1f BPM, feedback: %s", 
+            //                 heartRate, feedback.c_str());
+            //     });
 
             methods_.AddMethod("SetVolume", "设置音量", 
                 ParameterList({Parameter("volume", "0-100", kValueTypeNumber, true)}),

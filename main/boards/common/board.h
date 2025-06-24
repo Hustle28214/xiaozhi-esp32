@@ -6,7 +6,7 @@
 #include <mqtt.h>
 #include <udp.h>
 #include <string>
-
+#include "ultrasonic.h"
 #include "led/led.h"
 #include "backlight.h"
 #include "camera.h"
@@ -36,6 +36,7 @@ public:
     virtual std::string GetBoardType() = 0;
     virtual std::string GetUuid() { return uuid_; }
     virtual Backlight* GetBacklight() { return nullptr; }
+    virtual Ultrasonic* GetUltrasonic(){return nullptr;}
     virtual Led* GetLed();
     virtual AudioCodec* GetAudioCodec() = 0;
     virtual bool GetTemperature(float& esp32temp);

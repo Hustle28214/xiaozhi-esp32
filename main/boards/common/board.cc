@@ -3,7 +3,7 @@
 #include "settings.h"
 #include "display/display.h"
 #include "assets/lang_config.h"
-
+#include "ultrasonic.h"
 #include <esp_log.h>
 #include <esp_ota_ops.h>
 #include <esp_chip_info.h>

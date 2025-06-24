@@ -57,18 +57,18 @@ GetSensorStatus::~GetSensorStatus() {
 }
 
 
-void GetSensorStatus::InitHCSR04(){
+// void GetSensorStatus::InitHCSR04(){
 
-    // 
-    gpio_set_direction(hyper_trig_pin_, GPIO_MODE_OUTPUT);
-    gpio_set_direction(hyper_echo_pin_, GPIO_MODE_INPUT);
+//     // 
+//     gpio_set_direction(hyper_trig_pin_, GPIO_MODE_OUTPUT);
+//     gpio_set_direction(hyper_echo_pin_, GPIO_MODE_INPUT);
 
-    gpio_set_level(hyper_trig_pin_, 0);
-    esp_rom_delay_us(2);
-    gpio_set_level(hyper_trig_pin_, 1);
-    esp_rom_delay_us(10);
-    gpio_set_level(hyper_trig_pin_, 0);
-}
+//     gpio_set_level(hyper_trig_pin_, 0);
+//     esp_rom_delay_us(2);
+//     gpio_set_level(hyper_trig_pin_, 1);
+//     esp_rom_delay_us(10);
+//     gpio_set_level(hyper_trig_pin_, 0);
+// }
 // void GetSensorStatus::ReadHCSR04Data(){  
 //     uint64_t start_time = esp_timer_get_time();
 //     while (!gpio_get_level(hyper_echo_pin_)); // Wait for HIGH
