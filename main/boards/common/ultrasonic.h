@@ -11,7 +11,7 @@ public:
     // Ultrasonic(/* args */);
     // ~ultrasonic();
     void InitHCSR04();
-    float ReadDistance();
+    int ReadDistance();
 };
 
 

@@ -45,6 +45,17 @@ void McpServer::AddCommonTools() {
             return board.GetDeviceStatusJson();
         });
 
+    AddTool("self.get_ultrasonic_sensor_status",
+        "提供了实时的超声波传感器数据，返回值为人到机械臂的距离，单位为毫米\n"
+        "使用这个功能给下面的条件: \n"
+        "1. Answering questions about current condition (e.g. what is the current volume of the audio speaker?)\n"
+        "2. As the first step to control the device (e.g. turn up / down the volume of the audio speaker, etc.)",
+        PropertyList(),
+        [&board](const PropertyList& properties) -> ReturnValue {
+            auto ultra =  board.GetUltrasonic() -> ReadDistance();
+            return ultra;
+        });
+
     AddTool("self.audio_speaker.set_volume", 
         "Set the volume of the audio speaker. If the current volume is unknown, you must call `self.get_device_status` tool first and then call this tool.",
         PropertyList({

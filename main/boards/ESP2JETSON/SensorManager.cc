@@ -21,10 +21,11 @@ namespace iot {
         Sensor(GetSensorStatus* sensor) : Thing("Sensor", "传感器数据"), 
                   sensor_reader_(sensor)  // 初始化传感器
         {   
-            // properties_.AddNumberProperty("Ultrasonic","获取超声波传感器数据，返回值为人到机械臂的距离",[this]()-> float{
-            //     auto ultra = Board::GetInstance().GetUltrasonic();
-            //     return ultra->ReadDistance();
-            // });
+            properties_.AddNumberProperty("Ultrasonic","获取超声波传感器数据，返回值为人到机械臂的距离",[this]()-> float{
+                auto ultra = Board::GetInstance().GetUltrasonic();
+                printf("Ultrasonic: %d mm\n", ultra->ReadDistance());
+                return ultra->ReadDistance();
+            });
 
             // methods_.AddMethod("speak", "超声波检测", 
             //     ParameterList({Parameter("text", "播报内容", kValueTypeString, true)}),
