@@ -53,14 +53,14 @@ namespace iot {
                             heartRate, feedback.c_str());
                 });
 
-            // methods_.AddMethod("SetVolume", "设置音量", 
-            //     ParameterList({Parameter("volume", "0-100", kValueTypeNumber, true)}),
-            //     [this](const ParameterList& params) {
-            //         auto codec = Board::GetInstance().GetAudioCodec();
-            //         int volume = params["volume"].number();
-            //         volume = (volume > 100) ? 100 : volume;
-            //         codec->SetOutputVolume(static_cast<uint8_t>(volume));
-            //     });
+            methods_.AddMethod("SetVolume", "设置音量", 
+                ParameterList({Parameter("volume", "0-100", kValueTypeNumber, true)}),
+                [this](const ParameterList& params) {
+                    auto codec = Board::GetInstance().GetAudioCodec();
+                    int volume = params["volume"].number();
+                    volume = (volume > 100) ? 100 : volume;
+                    codec->SetOutputVolume(static_cast<uint8_t>(volume));
+                });
         }
 
         ~Sensor() {
