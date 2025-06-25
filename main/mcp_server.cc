@@ -55,6 +55,17 @@ void McpServer::AddCommonTools() {
             auto ultra =  board.GetUltrasonic() -> ReadDistance();
             return ultra;
         });
+    
+    AddTool("self.get_EMG_sensor_status",
+        "提供了实时的肌肉电传感器数据，返回值为电压，单位为伏特\n"
+        "使用这个功能给下面的条件: \n"
+        "1. Answering questions about current condition (e.g. what is the current volume of the audio speaker?)\n"
+        "2. As the first step to control the device (e.g. turn up / down the volume of the audio speaker, etc.)",
+        PropertyList(),
+        [&board](const PropertyList& properties) -> ReturnValue {
+            auto volt =  board.GetEMG() -> ReadEMGData();
+            return volt;
+        });
 
     AddTool("self.audio_speaker.set_volume", 
         "Set the volume of the audio speaker. If the current volume is unknown, you must call `self.get_device_status` tool first and then call this tool.",

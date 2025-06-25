@@ -37,6 +37,7 @@ public:
     virtual std::string GetUuid() { return uuid_; }
     virtual Backlight* GetBacklight() { return nullptr; }
     virtual Ultrasonic* GetUltrasonic(){return nullptr;}
+    virtual EMG* GetEMG(){return nullptr;}
     virtual Led* GetLed();
     virtual AudioCodec* GetAudioCodec() = 0;
     virtual bool GetTemperature(float& esp32temp);

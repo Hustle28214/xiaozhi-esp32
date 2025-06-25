@@ -3,8 +3,7 @@
 #include <driver/gpio.h>
 #include <driver/adc.h>
 
-#define EMG_SIG_PIN GPIO_NUM_3
-#define EMG_ADC_CHANNEL ADC1_CHANNEL_2
+
 
 // ADC1_CH2
 
