@@ -8,6 +8,11 @@
 
 请打开Menuconfig-Xiaozhi Assistant选择烧录ESP2JETSON，其他地方保持默认。
 
+此项目使用了两条I2C总线，分别是：
+
+I2C0：屏幕
+
+I2C1：传感器集群。e.g. 心率血氧传感器（MAX30100）
 
 # 主要改动
 
@@ -36,13 +41,32 @@ AddTool("self.get_ultrasonic_sensor_status",
         });
 ```
 
+获取EMG（肌肉电信号）传感器数据：
+
+```cpp
+AddTool("self.get_EMG_sensor_status",
+        "提供了实时的肌肉电传感器数据，返回值为电压，单位为伏特\n"
+        "使用这个功能给下面的条件: \n"
+        "1. Answering questions about current condition (e.g. what is the current volume of the audio speaker?)\n"
+        "2. As the first step to control the device (e.g. turn up / down the volume of the audio speaker, etc.)",
+        PropertyList(),
+        [&board](const PropertyList& properties) -> ReturnValue {
+            auto volt =  board.GetEMG() -> ReadEMGData();
+            return volt;
+        });
+```
+
 > main/boards/common/ultrasonic.cc:
 
 添加了超声波传感器引脚状态初始化和距离计算方法。
 
+> main/boards/common/EMG.cc
+
+添加了肌肉电信号传感器ADC功能初始化、引脚初始化以及电压计算方法。
+
 # 未来计划
 
-添加MAX30102心率血氧传感器(I2C,0x59)和sEMG肌肉电传感器(模拟输入)的状态获取工具。
+添加MAX30102心率血氧传感器(I2C,0x57)的状态获取工具。
 
 # 接线（正在更新）
 
