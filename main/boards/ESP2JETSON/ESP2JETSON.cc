@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "driver/adc.h"
+#include <driver/adc.h>
 #include "driver/gpio.h"
 #include <driver/i2c_master.h>
 #include <driver/spi_common.h>
@@ -166,7 +166,7 @@ class ESP2JETSON : public WifiBoard{
 
         void InitGetSensorStatus(){
             get_sensor_status = new GetSensorStatus(HCSR04_Echo_Pin,HCSR04_Trig_Pin,
-                                                    ADC_UNIT_1,ADC_CHANNEL_6);
+                                                    ADC_UNIT_1,ADC_CHANNEL_2);
         }
         void InitializeIot(){
             auto& thing_manager = iot::ThingManager::GetInstance();

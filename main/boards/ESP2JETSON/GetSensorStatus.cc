@@ -13,10 +13,12 @@
 
 GetSensorStatus::GetSensorStatus(gpio_num_t hyper_echo_pin,
         gpio_num_t hyper_trig_pin,
+        gpio_num_t emg_sig_pin,
         adc_unit_t adc_unit,
         adc_channel_t adc_channel)
     : hyper_echo_pin_(hyper_echo_pin),
     hyper_trig_pin_(hyper_trig_pin),
+    emg_sig_pin_(emg_sig_pin),
     adc_unit_(adc_unit),
     adc_channel_(adc_channel),
     adc_handle_(nullptr)  // 初始化ADC句柄
@@ -41,6 +43,15 @@ GetSensorStatus::GetSensorStatus(gpio_num_t hyper_echo_pin,
         gpio_config(&trig_conf);
         gpio_set_level(hyper_trig_pin_, 0);
 
+        // 再加一个EMG的引脚配置
+
+        gpio_config_t emg_conf = {
+            .pin_bit_mask = (1ULL << emg_sig_pin_),
+            .mode = GPIO_MODE_INPUT,
+            .pull_up_en = GPIO_PULLUP_DISABLE,
+            .pull_down_en = GPIO_PULLDOWN_DISABLE, 
+            .intr_type = GPIO_INTR_DISABLE // 禁用中断
+        }
         // 使用成员变量初始化ADC
         InitializeAdc();
 }
