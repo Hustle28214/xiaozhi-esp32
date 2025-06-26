@@ -11,4 +11,4 @@ class EMG{
         void InitEMG();
         int ReadEMGData();
 
-}
+};

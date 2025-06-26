@@ -10,6 +10,7 @@
 #include "led/led.h"
 #include "backlight.h"
 #include "camera.h"
+#include "EMG.h"
 
 void* create_board();
 class AudioCodec;
