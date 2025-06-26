@@ -7,6 +7,7 @@
 #include <udp.h>
 #include <string>
 #include "ultrasonic.h"
+#include "spo2_sensor.h"
 #include "led/led.h"
 #include "backlight.h"
 #include "camera.h"
@@ -37,7 +38,6 @@ public:
     virtual std::string GetUuid() { return uuid_; }
     virtual Backlight* GetBacklight() { return nullptr; }
     virtual Ultrasonic* GetUltrasonic(){return nullptr;}
-    virtual EMG* GetEMG(){return nullptr;}
     virtual Led* GetLed();
     virtual AudioCodec* GetAudioCodec() = 0;
     virtual bool GetTemperature(float& esp32temp);
@@ -54,6 +54,8 @@ public:
     virtual void SetPowerSaveMode(bool enabled) = 0;
     virtual std::string GetBoardJson() = 0;
     virtual std::string GetDeviceStatusJson() = 0;
+    virtual MAX30102* GetMAX30102() { return nullptr; }  // 默认返回 nullptr
+
 };
 
 #define DECLARE_BOARD(BOARD_CLASS_NAME) \

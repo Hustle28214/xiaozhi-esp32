@@ -55,18 +55,22 @@ void McpServer::AddCommonTools() {
             auto ultra =  board.GetUltrasonic() -> ReadDistance();
             return ultra;
         });
-    
-    AddTool("self.get_EMG_sensor_status",
-        "提供了实时的肌肉电传感器数据，返回值为电压，单位为伏特\n"
+
+    AddTool("self.get_blood_oxygen_status",
+        "提供了实时的血氧传感器数据，返回值为人的血氧饱和度(SpO2)百分比和心率，单位为bpm\n"
         "使用这个功能给下面的条件: \n"
-        "1. Answering questions about current condition (e.g. what is the current volume of the audio speaker?)\n"
-        "2. As the first step to control the device (e.g. turn up / down the volume of the audio speaker, etc.)",
+        "1. 回答关于当前健康状况的问题 (例如: 当前血氧水平是多少?)\n"
+        "2. 作为健康监测的第一步 (例如: 用户血氧是否正常? 心率是否正常?)",
         PropertyList(),
         [&board](const PropertyList& properties) -> ReturnValue {
-            auto volt =  board.GetEMG() -> ReadEMGData();
-            return volt;
+                  // 获取血氧传感器数据
+            auto spo2 = board.GetMAX30102()->Read_blood_oxgen();
+            auto heart = board.GetMAX30102()->Read_Heartrate();
+            ReturnValue result;
+            result = std::to_string(spo2) + "," + std::to_string(heart);  // 返回"血氧值,心率"的字符串
+            return result;
         });
-
+        
     AddTool("self.audio_speaker.set_volume", 
         "Set the volume of the audio speaker. If the current volume is unknown, you must call `self.get_device_status` tool first and then call this tool.",
         PropertyList({

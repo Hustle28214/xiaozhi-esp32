@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include <driver/adc.h>
+#include "driver/adc.h"
 #include "driver/gpio.h"
 #include <driver/i2c_master.h>
 #include <driver/spi_common.h>
@@ -62,6 +62,8 @@ class ESP2JETSON : public WifiBoard{
                     .enable_internal_pullup = 1,
                 },
             };
+
+            
             ESP_ERROR_CHECK(i2c_new_master_bus(&bus_config, &display_i2c_bus_));
         }
 
@@ -177,6 +179,7 @@ class ESP2JETSON : public WifiBoard{
 
         
     public:
+        // i2c_master_bus_handle_t display_i2c_bus_; 
         ESP2JETSON() :
             boot_button_(BOOT_BUTTON_GPIO),
             touch_button_(TOUCH_BUTTON_GPIO),

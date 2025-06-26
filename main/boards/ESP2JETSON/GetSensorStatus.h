@@ -16,7 +16,6 @@ class GetSensorStatus {
         esp_timer_handle_t timer_handle_ = nullptr;
         gpio_num_t hyper_echo_pin_;
         gpio_num_t hyper_trig_pin_;
-        gpio_num_t emg_sig_pin;
         adc_unit_t adc_unit_;
         adc_channel_t adc_channel_;
         adc_oneshot_unit_handle_t adc_handle_;
